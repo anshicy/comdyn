@@ -1,0 +1,14 @@
+*Part, name=Part-Cable250
+*Node
+      1,         250.,           0.,           0.
+      2,           0.,         150.,           0.
+*Element, type=T3D2
+1, 1, 2
+*Nset, nset=_PickedSet2, internal
+ 1, 2
+*Elset, elset=_PickedSet2, internal
+ 1,
+** Section: Section-Cable
+*Solid Section, elset=_PickedSet2, material=Steel
+0.25,
+*End Part
