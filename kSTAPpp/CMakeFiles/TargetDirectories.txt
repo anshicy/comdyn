@@ -1,0 +1,3 @@
+/home/prime/kre/STAPpp/CMakeFiles/stap++.dir
+/home/prime/kre/STAPpp/CMakeFiles/edit_cache.dir
+/home/prime/kre/STAPpp/CMakeFiles/rebuild_cache.dir

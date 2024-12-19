@@ -1,0 +1,15 @@
+# ninja log v6
+56	130	7561220441800747	CMakeFiles/stap++.dir/cpp/infe.cpp.obj	3e5f5dbc9b4f88bf
+61	635	7561220441860601	CMakeFiles/stap++.dir/cpp/main.cpp.obj	72fb72d6c5d411ab
+13	510	7561220441372251	CMakeFiles/stap++.dir/cpp/Clock.cpp.obj	c7a1993bd60d2c13
+34	589	7561220441581340	CMakeFiles/stap++.dir/cpp/Material.cpp.obj	6a8166c905bb16f
+28	585	7561220441531469	CMakeFiles/stap++.dir/cpp/LoadCaseData.cpp.obj	56523888f8082ebb
+4	29	7561220440781445	clean	8c45b54705a541e8
+40	587	7561220441641174	CMakeFiles/stap++.dir/cpp/Node.cpp.obj	b83b2dcd3413f7ba
+23	597	7561220441471626	CMakeFiles/stap++.dir/cpp/ElementGroup.cpp.obj	1b550ba9ab893362
+51	616	7561220441750881	CMakeFiles/stap++.dir/cpp/Solver.cpp.obj	632e1e57d8451947
+45	623	7561220441701016	CMakeFiles/stap++.dir/cpp/Outputter.cpp.obj	481140b2c8df19db
+18	610	7561220441431743	CMakeFiles/stap++.dir/cpp/Domain.cpp.obj	f7064c9ec5623740
+7	3967	7561220441320002	CMakeFiles/stap++.dir/cpp/C3D20.cpp.obj	79396a391d762ee8
+3968	4288	7561220480920003	stap++.exe	c0dcb0546a9faefb
+4	182	7561222341747136	build.ninja	6c911ed5b3abb32c
