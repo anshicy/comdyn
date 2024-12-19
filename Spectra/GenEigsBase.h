@@ -1,8 +1,3 @@
-// Copyright (C) 2018-2022 Yixuan Qiu <yixuan.qiu@cos.name>
-//
-// This Source Code Form is subject to the terms of the Mozilla
-// Public License v. 2.0. If a copy of the MPL was not distributed
-// with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #ifndef SPECTRA_GEN_EIGS_BASE_H
 #define SPECTRA_GEN_EIGS_BASE_H
@@ -26,14 +21,6 @@
 #include "LinAlg/Arnoldi.h"
 
 namespace Spectra {
-
-///
-/// \ingroup EigenSolver
-///
-/// This is the base class for general eigen solvers, mainly for internal use.
-/// It is kept here to provide the documentation for member functions of concrete eigen solvers
-/// such as GenEigsSolver and GenEigsRealShiftSolver.
-///
 template <typename OpType, typename BOpType>
 class GenEigsBase
 {

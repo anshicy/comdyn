@@ -69,7 +69,7 @@ public:
     ///
     /// \param tol Tolerance for convergence
     /// \param number_eigenvalue Number of request eigenvalues
-    /// \return bool true if all eigenvalues are converged
+    /// \return bool true if all eigenvalues are converged  !!
     bool check_convergence(Scalar tol, Index number_eigenvalues)
     {
         const Array norms = m_residues.colwise().norm();
@@ -110,7 +110,7 @@ Eigen::ComputationInfo RitzPairs<Scalar>::compute_eigen_pairs(const SearchSpace<
     const Matrix& op_basis_prod = search_space.operator_basis_product();
 
     // Form the small eigenvalue
-    Matrix small_matrix = basis_vectors.transpose() * op_basis_prod;
+    Matrix small_matrix = basis_vectors.transpose() * op_basis_prod; //相当于取子空间
 
     // Small eigenvalue problem
     Eigen::SelfAdjointEigenSolver<Matrix> eigen_solver(small_matrix);

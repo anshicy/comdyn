@@ -1,8 +1,3 @@
-// Copyright (C) 2020 Netherlands eScience Center <J.Wehner@esciencecenter.nl>
-//
-// This Source Code Form is subject to the terms of the Mozilla
-// Public License v. 2.0. If a copy of the MPL was not distributed
-// with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #ifndef SPECTRA_JD_SYM_EIGS_BASE_H
 #define SPECTRA_JD_SYM_EIGS_BASE_H
@@ -20,16 +15,6 @@
 #include "LinAlg/RitzPairs.h"
 
 namespace Spectra {
-
-///
-/// \ingroup EigenSolver
-///
-/// This is the base class for symmetric JD eigen solvers, mainly for internal use.
-/// It is kept here to provide the documentation for member functions of concrete eigen solvers
-/// such as DavidsonSymEigsSolver.
-///
-/// This class uses the CRTP method to call functions from the derived class.
-///
 template <typename Derived, typename OpType>
 class JDSymEigsBase
 {
@@ -73,17 +58,18 @@ private:
     }
 
 public:
+    //成员初始化列表
     JDSymEigsBase(OpType& op, Index nev, Index nvec_init, Index nvec_max) :
         m_matrix_operator(op),
-        m_number_eigenvalues(nev),
+		m_number_eigenvalues(nev), //要搜索的特征值个数 设定搜索空间和最大搜索空间，然后直接返回前nev个特征值
         m_max_search_space_size(nvec_max < op.rows() ? nvec_max : 10 * m_number_eigenvalues),
         m_initial_search_space_size(nvec_init < op.rows() ? nvec_init : 2 * m_number_eigenvalues),
-        m_correction_size(m_number_eigenvalues)
+        m_correction_size(m_number_eigenvalues) //!!
     {
         check_argument();
         initialize();
     }
-
+    //委托构造函数
     JDSymEigsBase(OpType& op, Index nev) :
         JDSymEigsBase(op, nev, 2 * nev, 10 * nev) {}
 
@@ -126,6 +112,7 @@ public:
     ///
     Index num_iterations() const { return niter_; }
 
+    //在进行guess的时候，已经计算了特征值和特征向量
     Vector eigenvalues() const { return m_ritz_pairs.ritz_values().head(m_number_eigenvalues); }
 
     Matrix eigenvectors() const { return m_ritz_pairs.ritz_vectors().leftCols(m_number_eigenvalues); }
@@ -133,8 +120,8 @@ public:
     Index compute(SortRule selection = SortRule::LargestMagn, Index maxit = 100,
                   Scalar tol = 100 * Eigen::NumTraits<Scalar>::dummy_precision())
     {
-        Derived& derived = static_cast<Derived&>(*this);
-        Matrix intial_space = derived.setup_initial_search_space(selection);
+        Derived& derived = static_cast<Derived&>(*this); //在基类中调用派生类的成员函数或访问派生类的成员变量
+        Matrix intial_space = derived.setup_initial_search_space(selection); //在D类里
         return compute_with_guess(intial_space, selection, maxit, tol);
     }
 
@@ -157,13 +144,14 @@ public:
 
             m_search_space.update_operator_basis_product(m_matrix_operator);
 
+            //在子空间中求解小型特征值问题
             Eigen::ComputationInfo small_problem_info = m_ritz_pairs.compute_eigen_pairs(m_search_space);
             if (small_problem_info != Eigen::ComputationInfo::Success)
             {
                 m_info = CompInfo::NumericalIssue;
                 break;
             }
-            m_ritz_pairs.sort(selection);
+            m_ritz_pairs.sort(selection);  //要排序
 
             bool converged = m_ritz_pairs.check_convergence(tol, m_number_eigenvalues);
             if (converged)
@@ -176,15 +164,17 @@ public:
                 m_info = CompInfo::NotConverging;
                 break;
             }
+			//计算修正向量
             Derived& derived = static_cast<Derived&>(*this);
             Matrix corr_vect = derived.calculate_correction_vector();
 
+			//加入新的搜索空间
             m_search_space.extend_basis(corr_vect);
         }
         return (m_ritz_pairs.converged_eigenvalues()).template cast<Index>().head(m_number_eigenvalues).sum();
     }
 };
 
-}  // namespace Spectra
+}  
 
-#endif  // SPECTRA_JD_SYM_EIGS_BASE_H
+#endif  

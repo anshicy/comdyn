@@ -1,8 +1,3 @@
-// Copyright (C) 2016-2022 Yixuan Qiu <yixuan.qiu@cos.name>
-//
-// This Source Code Form is subject to the terms of the Mozilla
-// Public License v. 2.0. If a copy of the MPL was not distributed
-// with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #ifndef SPECTRA_SYM_EIGS_SOLVER_H
 #define SPECTRA_SYM_EIGS_SOLVER_H
